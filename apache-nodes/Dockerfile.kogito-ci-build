@@ -15,6 +15,9 @@ ENV LANG='C.UTF-8'
 ENV TZ='America/New_York'
 
 RUN apt update && apt upgrade -y && apt install -y \
+# QEMU for multi-architecture support and AVX emulation (MongoDB 5.0+ compatibility)
+qemu-user-static \
+binfmt-support \
 # skdman deps (BEGIN)
 git \
 findutils \
@@ -198,3 +201,4 @@ RUN mkdir ~/.redhat && (echo '{"disabled":true}' > ~/.redhat/io.quarkus.analytic
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["bash"]
+
